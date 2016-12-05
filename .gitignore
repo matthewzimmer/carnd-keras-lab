@@ -90,3 +90,6 @@ ENV/
 
 .idea
 *.iml
+
+train.p
+test.p
