@@ -12,9 +12,9 @@ import csv
 
 from sklearn.preprocessing import LabelBinarizer
 
-from maths.transformations.image_jitterer import ImageJitterer
-from plot.image_plotter import ImagePlotter
-from serializers.trained_data_serializer import TrainedDataSerializer
+from zimpy.maths.transformations.image_jitterer import ImageJitterer
+from zimpy.plot.image_plotter import ImagePlotter
+from zimpy.serializers.trained_data_serializer import TrainedDataSerializer
 
 
 class GermanTrafficSignDataset:

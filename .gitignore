@@ -93,3 +93,5 @@ ENV/
 
 train.p
 test.p
+traffic-sign-data.zip
+data
