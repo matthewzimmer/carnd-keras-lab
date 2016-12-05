@@ -9,8 +9,8 @@ from keras.utils import np_utils
 from zimpy.datasets.german_traffic_signs import GermanTrafficSignDataset
 
 data = GermanTrafficSignDataset()
-data.configure(one_hot=True)
-
+data.configure(one_hot=True, train_validate_split_percentage=0)
+print(data)
 X_train = data.train_orig
 y_train = data.train_labels
 nb_classes = data.num_classes
@@ -78,24 +78,22 @@ assert(history.history['acc'][0] > 0.5), "The training accuracy was: %.3f" % his
 
 
 
-
-
+from sklearn.model_selection import train_test_split
 
 # TODO: Split some of the training data into a validation dataset.
-X_validate = data.validate_flat
-y_validate = data.validate_labels
+X_train, X_val, y_train, y_val = train_test_split(
+            X_train,
+            y_train,
+            test_size=0.25,
+            random_state=832224)
 
 # TODO: Compile and train the model to measure validation accuracy.
-model.compile(optimizer='adam',
-          loss='categorical_crossentropy',
-          metrics=['accuracy'])
-
 history = model.fit(X_train, y_train,
                     batch_size=batch_size, nb_epoch=nb_epoch,
-                    verbose=1, validation_data=(X_validate, y_validate))
+                    verbose=1, validation_data=(X_val, y_val))
 
-
+score = model.evaluate(X_val, y_val, verbose=1)
 
 # STOP: Do not change the tests below. Your implementation should pass these tests.
-assert(round(X_train.shape[0] / float(X_validate.shape[0])) == 3), "The training set is %.3f times larger than the validation set." % X_train.shape[0] / float(X_validate.shape[0])
+assert(round(X_train.shape[0] / float(X_val.shape[0])) == 3), "The training set is %.3f times larger than the validation set." % X_train.shape[0] / float(X_val.shape[0])
 assert(history.history['val_acc'][0] > 0.6), "The validation accuracy is: %.3f" % history.history['val_acc'][0]

@@ -51,7 +51,7 @@ class GermanTrafficSignDataset:
         # Flag indicating whether the utilizer has configured the classifier.
         self.__configured = False
 
-    def configure(self, one_hot=True, train_validate_split_percentage=0.2):
+    def configure(self, one_hot=True, train_validate_split_percentage=0.0):
         """
         Pipeline import sequence
 
