@@ -18,7 +18,6 @@ from zimpy.serializers.trained_data_serializer import TrainedDataSerializer
 
 
 class GermanTrafficSignDataset:
-
     TRAFFIC_SIGN_DATA_SRC_PATH = 'https://d17h27t6h515a5.cloudfront.net/topher/2016/October/580d53ce_traffic-sign-data/traffic-sign-data.zip'
     TRAFFIC_SIGN_DATA_DST_PATH = os.path.join(os.path.dirname(__file__), '..', 'traffic-sign-data.zip')
 
@@ -123,9 +122,6 @@ class GermanTrafficSignDataset:
                 labels = np.argmax(labels, axis=1)
             except:
                 ignore = True
-        # for cls in np.unique(labels):
-        #     class_counts[cls] = labels.tolist().count(cls)
-        # self.class_counts = class_counts
         self.class_counts = dict(zip(np.unique(labels), np.bincount(labels)))
 
     def restore_from_data(self, data):
@@ -357,20 +353,22 @@ class GermanTrafficSignDataset:
 
     def __download_traffic_sign_data(self):
         if not os.path.isfile(self.TRAFFIC_SIGN_DATA_DST_PATH):
-            print('{} not found. Downloading from {} now.'.format(self.TRAFFIC_SIGN_DATA_DST_PATH, self.TRAFFIC_SIGN_DATA_SRC_PATH))
+            print('{} not found. Downloading from {} now.'.format(self.TRAFFIC_SIGN_DATA_DST_PATH,
+                                                                  self.TRAFFIC_SIGN_DATA_SRC_PATH))
             urlretrieve(self.TRAFFIC_SIGN_DATA_SRC_PATH, self.TRAFFIC_SIGN_DATA_DST_PATH)
             print('{} downloaded'.format(self.TRAFFIC_SIGN_DATA_DST_PATH))
 
-        assert hashlib.md5(open(self.TRAFFIC_SIGN_DATA_DST_PATH, 'rb').read()).hexdigest() == 'c2ced7c725ead1fcf7834d2ec2288c77', self.TRAFFIC_SIGN_DATA_DST_PATH + ' file is corrupted.  Remove the file and try again.'
+        assert hashlib.md5(open(self.TRAFFIC_SIGN_DATA_DST_PATH,
+                                'rb').read()).hexdigest() == 'c2ced7c725ead1fcf7834d2ec2288c77', self.TRAFFIC_SIGN_DATA_DST_PATH + ' file is corrupted.  Remove the file and try again.'
 
-        #extract files:
+        # extract files:
         out_path = os.path.join(os.path.dirname(__file__), '..', 'traffic-sign-data')
         print('Extracting {}'.format(self.TRAFFIC_SIGN_DATA_DST_PATH))
         with zipfile.ZipFile(self.TRAFFIC_SIGN_DATA_DST_PATH, "r") as z:
             z.extractall('/tmp/traffic_sign_data')
 
-        shutil.move('/tmp/traffic_sign_data/lab 2 data/train.p', out_path+'/train.p')
-        shutil.move('/tmp/traffic_sign_data/lab 2 data/test.p', out_path+'/test.p')
+        shutil.move('/tmp/traffic_sign_data/lab 2 data/train.p', out_path + '/train.p')
+        shutil.move('/tmp/traffic_sign_data/lab 2 data/test.p', out_path + '/test.p')
         shutil.rmtree('/tmp/traffic_sign_data')
 
         print('{} extracted'.format(self.TRAFFIC_SIGN_DATA_DST_PATH))
@@ -494,6 +492,23 @@ class GermanTrafficSignDataset:
             'Bucketized german traffic sign images into three buckets: orig, gray and flat. flat is ' \
             'used for network training while orig and gray are meant for visulizations.'
         )
+
+    def normalize_data(self, image_data, lwr_bound=-0.5, upr_bound=0.5):
+        """
+        Leveraged from Lesson 7 from Tensorflow lab.
+        Normalize the image data with Min-Max scaling to a range of [0.1, 0.9]
+        :param image_data: The image data to be normalized
+        :return: Normalized image data
+        """
+        if len(image_data) <= 0:
+            return image_data
+
+        a = lwr_bound
+        b = upr_bound
+        x_min = np.min(image_data)
+        x_max = np.max(image_data)
+        x_prime = [a + (((x - x_min) * (b - a)) / (x_max - x_min)) for x in image_data]
+        return np.array(x_prime)
 
     def one_hot_encode_labels(self, labels):
         """
