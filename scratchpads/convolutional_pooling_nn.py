@@ -1,4 +1,4 @@
-from keras.layers import Dense, Activation, Flatten, Convolution2D
+from keras.layers import Dense, Activation, Flatten, Convolution2D, MaxPooling2D
 from keras.models import Sequential
 from keras.utils import np_utils
 
@@ -15,6 +15,8 @@ X_train = data.normalize_data(X_train)
 # TODO: Re-construct the network and add a convolutional layer before the first fully-connected layer.
 model = Sequential(name='input')
 model.add(Convolution2D(32, 3, 3, border_mode='valid', input_shape=(32, 32, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
 model.add(Dense(128, input_dim=32*32*3, name='hidden1'))
 model.add(Activation('relu'))
@@ -26,7 +28,7 @@ model.summary()
 # TODO: Compile and train the model.
 batch_size = 128
 nb_classes = data.num_classes
-nb_epoch = 2
+nb_epoch = 3
 
 model.compile(optimizer='adam',
           loss='categorical_crossentropy',
