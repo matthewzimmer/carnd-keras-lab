@@ -2,7 +2,7 @@ from keras.layers import Dense, Activation, Flatten, Convolution2D, MaxPooling2D
 from keras.models import Sequential
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
-from keras import backend as K
+from networks.keras import backend as K
 
 from zimpy.datasets.german_traffic_signs import GermanTrafficSignDataset
 
