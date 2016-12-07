@@ -48,7 +48,6 @@ else:
     X_train = X_train.reshape(X_train.shape[0], img_rows, img_cols, nb_channels)
     input_shape = (img_rows, img_cols, nb_channels)
 
-
 # build the model
 model = Sequential(name='input')
 model.add(Convolution2D(16, kernel_size[0], kernel_size[1], border_mode='valid', input_shape=input_shape))
@@ -69,19 +68,35 @@ model.summary()
 
 # Compile and train the model.
 model.compile(optimizer='adam',
-          loss='categorical_crossentropy',
-          metrics=['accuracy'])
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
 
 # Split some of the training data into a validation dataset.
 X_train, X_val, y_train, y_val = train_test_split(
-            X_train,
-            y_train,
-            test_size=0.25,
-            random_state=832224)
+    X_train,
+    y_train,
+    test_size=0.25,
+    random_state=832224)
 
 history = model.fit(X_train, y_train,
                     batch_size=batch_size, nb_epoch=nb_epoch,
                     verbose=1, validation_data=(X_val, y_val))
 
+score = model.evaluate(X_val, y_val, verbose=1)
+print('Validation (loss, accuracy): (%.3f, %.3f)' % (score[0], score[1]))
+
 # STOP: Do not change the tests below. Your implementation should pass these tests.
-assert(history.history['val_acc'][-1] > 0.9), "The validation accuracy is: %.3f" % history.history['val_acc'][-1]
+assert (history.history['val_acc'][-1] > 0.9), "The validation accuracy is: %.3f" % history.history['val_acc'][-1]
+
+
+X_test = data.test_orig
+y_test = data.test_labels
+X_test = X_test.astype('float32')
+X_test /= 255
+X_test -= 0.5
+
+loss, accuracy = model.evaluate(X_test, y_test)
+
+print('test loss: ', loss)
+print('test accuracy: ', accuracy)
+print()

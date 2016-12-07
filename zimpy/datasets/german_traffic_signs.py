@@ -172,6 +172,26 @@ class GermanTrafficSignDataset:
         end = self._index_in_epoch
         return self.train_flat[start:end], self.train_labels[start:end], start, end
 
+    def next_orig_batch(self, batch_size):
+        """Return the next `batch_size` examples from this data set."""
+        start = self._index_in_epoch
+        self._index_in_epoch += batch_size
+        if self._index_in_epoch > self.num_training:
+            # Finished epoch
+            self._epochs_completed += 1
+            # Shuffle the data
+            perm = np.arange(self.num_training)
+            np.random.shuffle(perm)
+            self.train_orig = self.train_orig[perm]
+            self.train_labels = self.train_labels[perm]
+
+            # Start next epoch
+            start = 0
+            self._index_in_epoch = batch_size
+            assert batch_size <= self.num_training
+        end = self._index_in_epoch
+        return self.train_orig[start:end], self.train_labels[start:end], start, end
+
     def serialize(self, data={}):
         return {**data, **{
             'sign_names_map': self.sign_names_map,
