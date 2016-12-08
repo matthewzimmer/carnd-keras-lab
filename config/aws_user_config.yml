@@ -14,6 +14,7 @@ packages:
 runcmd:
 #  - [wget, "https://github.com/matthewzimmer/carnd-keras-lab/archive/master.zip", -O, ~/carnd-keras-lab.zip]
   - git clone https://github.com/matthewzimmer/carnd-keras-lab
+  - git clone https://github.com/matthewzimmer/carnd-transfer-learning
 
 # add each entry to ~/.ssh/authorized_keys for the configured user or the
 # first user defined in the user definition directive.

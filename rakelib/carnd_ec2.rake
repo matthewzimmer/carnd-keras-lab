@@ -1,5 +1,5 @@
 # CARND_UP = '54.200.226.53'
-CARND_UP = '54.191.69.58'
+CARND_UP = '54.202.207.67'
 INSTANCE_ID = 'i-516ff7c4'
 
 namespace :carnd do
