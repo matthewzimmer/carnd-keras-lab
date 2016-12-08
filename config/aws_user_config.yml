@@ -1,0 +1,109 @@
+#cloud-config
+repo_update: true
+repo_upgrade: all
+
+debug:
+  verbose: true
+
+packages:
+  - git
+  - git-core
+  - zip
+  - unzip
+
+runcmd:
+#  - [wget, "https://github.com/matthewzimmer/carnd-keras-lab/archive/master.zip", -O, ~/carnd-keras-lab.zip]
+  - git clone https://github.com/matthewzimmer/carnd-keras-lab
+
+# add each entry to ~/.ssh/authorized_keys for the configured user or the
+# first user defined in the user definition directive.
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1kOuelsFSagAGKTpo0F75YdZuqACKXiRKl45MkDMVX6cQHrHTy1ECUVfhcXOr01X9AfBO2v0/36UaFBiMrnIO/YcYz1DOyuOJaS/z5ZapIh7sBHBO6/c0EQBxj3IjPljoXULracjKqCgQrVB40eNnd6ytKI2qIc/J/L/15rHuToe2vQa1W8qZf9hZMsQWf3x0BLi0+NTk3MPnnDEj6lwudG6gpjIyxXRopDMETcKIJbI/tnMuSfJZodKxdWtMmOOf+rc/a8tIwbLzkhHZvRa5suLBknO1Jr4M2nRn5yR8mo+GL5PZ2Bo7XpmIgNuUah+RlygWLQn1ZtQMaC3EQ5xV m16r01@gmail.com
+
+# Send pre-generated ssh private keys to the server
+# If these are present, they will be written to /etc/ssh and
+# new random keys will not be generated
+#  in addition to 'rsa' and 'dsa' as shown below, 'ecdsa' is also supported
+ssh_keys:
+  rsa_private: |
+    -----BEGIN RSA PRIVATE KEY-----
+    Proc-Type: 4,ENCRYPTED
+    DEK-Info: AES-128-CBC,EF30A27C796A58A6517D7C7D789BE4C9
+
+    t3aUCFgisag0koY/HcreP+eHMBJC0OR2hUSavl0vHc8jo2fh+Hfox2DHt1YSKEsy
+    381Lfvwa2jA/MWBvq6zOiD0EQwl9IjTJWpYM6vW5LyxT4wyw6bkbM6NSrOkmE+LV
+    ytusOGGfDYVv7TG0HxdagQH5qU+pkbAdeQhTFrQu6qif+hBkGLUXsQhKsT8Pc8z8
+    Nrznvl/f0sszc862fm1/Zhu/ktydg/jNg15v8G2FuXjAFrE3Zu+GXi4NRA5qy9Qr
+    XoNHvJQB9PKoIyItLeLi835ba6nSt/kDAwDM1zl9vOgVO0IgfQt+fPz5jQ/Kabk1
+    iqQE8AqHwfSt4olKMCVjtpo7hvS2JMzOLed+HKJ2rYjiFiB8qCElwATf0JTF3Pqi
+    s/7XpndGcD7FtDhb3OHwU1qhurZRQ0SyNlLKNeXGjUdf/GUvh1zAWY7I0aR3/Z30
+    7H0Dzjo1CcnChItrZql6cQthvlvChMwfq0LTOtihnAZgcXkvykCnNuJm9utHaLqH
+    eGBdrZqDGVp/xRaGAG2+UGSBb6HOjVb1u6XNwXwDANo6BWL4sxjb6OrpPwTHhCrt
+    Kl0lf+A426YqkwZ9ZjuujtOuvezhCXt9anE1cTcC3GGulgWmWlIaxffc7AMkZS42
+    Ib/h7Dsufs7spAFx4LPTicoG+2K5jlkU+GS8wAjUTj4O5pIzqer5XiK2ea/b28Cs
+    ZqdpS14kYcc1dcBCOG3IWbNLvqF4k+2ur3jRTkcpzm7CifhT3VuaBQPEeTzUfmuw
+    Cs6o1N2+vfKohomyKWJ8hquGiYkbdfKKAUJKmiJANwoF6Dl+8+kG4jhMgo6LfTEW
+    aWKnBaAmxvX4vLanu0rtxxMzlOpNHo9Qy0MwbFPbUOLBk3ohfF19MXnbISX9uNol
+    vJIpMamQCdi6k4WzWUDTK0cjq0xuCAd0u+x3YT3QVN6NyR78f5d4rzxQIwpNFqZ9
+    qpdXEHz9csiq0o0IwPnZ8Y+rdzxhF2NJ6oeWJ5yWLL1ubestrP0IxOUAuO2NE5EJ
+    54EUjxHhmimPWxI6F+HXxcnRfDu1XZ4mDb0dpvA6SbhKLZCrA3U7aCdF9tkU5s96
+    O8kQCWRyfKgvPWwgvHEcj5Gflbam2rHj0BEcjsYIrbO3jGCK9O2FxcR7n+EZWs9z
+    sj9mpawUUXiV4l2hHMryyko37R4vigNJpBvfUSenSKrfhHyA7n0TuUd0jWXiACKx
+    bXvDyZCCGBcuH/J4E9+Or8t3/Gjfpa53jPjv8HGYNvgd+zRX86FDsjtV7NECHW/l
+    mC/ePHzGSPuKAtrtuiq0nTOWQRhg8J4yO7MT1OEWKV2YoIpSRimKAaYnR9fvUisD
+    t48jdEQESNIKj36/h55Ut1sjcCOhAdnN2EJJlFBNVaOi7Y1T74FK+kC2+y5H+QnO
+    buTNPPPuWsNjp5rQu6Ub84LmHYANJKjpYjqqmUcGZZtCZqiFGaUDAM+T/ffu2IUI
+    ZbY3OQjEcemV+NJC9PM1VZey6lwKcXSaJwXrld8MurNeBIms8CUcR+vO0QfKsJMl
+    /6TUU+cm7xMBluCoVtMLFxzMYN0QZAGMqeQse31+fYqhD95JATBTcVWtVxSzgDvi
+    -----END RSA PRIVATE KEY-----
+
+  rsa_public: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1kOuelsFSagAGKTpo0F75YdZuqACKXiRKl45MkDMVX6cQHrHTy1ECUVfhcXOr01X9AfBO2v0/36UaFBiMrnIO/YcYz1DOyuOJaS/z5ZapIh7sBHBO6/c0EQBxj3IjPljoXULracjKqCgQrVB40eNnd6ytKI2qIc/J/L/15rHuToe2vQa1W8qZf9hZMsQWf3x0BLi0+NTk3MPnnDEj6lwudG6gpjIyxXRopDMETcKIJbI/tnMuSfJZodKxdWtMmOOf+rc/a8tIwbLzkhHZvRa5suLBknO1Jr4M2nRn5yR8mo+GL5PZ2Bo7XpmIgNuUah+RlygWLQn1ZtQMaC3EQ5xV m16r01@gmail.com
+
+
+write_files:
+- content: |
+    -----BEGIN RSA PRIVATE KEY-----
+        Proc-Type: 4,ENCRYPTED
+        DEK-Info: AES-128-CBC,EF30A27C796A58A6517D7C7D789BE4C9
+
+        t3aUCFgisag0koY/HcreP+eHMBJC0OR2hUSavl0vHc8jo2fh+Hfox2DHt1YSKEsy
+        381Lfvwa2jA/MWBvq6zOiD0EQwl9IjTJWpYM6vW5LyxT4wyw6bkbM6NSrOkmE+LV
+        ytusOGGfDYVv7TG0HxdagQH5qU+pkbAdeQhTFrQu6qif+hBkGLUXsQhKsT8Pc8z8
+        Nrznvl/f0sszc862fm1/Zhu/ktydg/jNg15v8G2FuXjAFrE3Zu+GXi4NRA5qy9Qr
+        XoNHvJQB9PKoIyItLeLi835ba6nSt/kDAwDM1zl9vOgVO0IgfQt+fPz5jQ/Kabk1
+        iqQE8AqHwfSt4olKMCVjtpo7hvS2JMzOLed+HKJ2rYjiFiB8qCElwATf0JTF3Pqi
+        s/7XpndGcD7FtDhb3OHwU1qhurZRQ0SyNlLKNeXGjUdf/GUvh1zAWY7I0aR3/Z30
+        7H0Dzjo1CcnChItrZql6cQthvlvChMwfq0LTOtihnAZgcXkvykCnNuJm9utHaLqH
+        eGBdrZqDGVp/xRaGAG2+UGSBb6HOjVb1u6XNwXwDANo6BWL4sxjb6OrpPwTHhCrt
+        Kl0lf+A426YqkwZ9ZjuujtOuvezhCXt9anE1cTcC3GGulgWmWlIaxffc7AMkZS42
+        Ib/h7Dsufs7spAFx4LPTicoG+2K5jlkU+GS8wAjUTj4O5pIzqer5XiK2ea/b28Cs
+        ZqdpS14kYcc1dcBCOG3IWbNLvqF4k+2ur3jRTkcpzm7CifhT3VuaBQPEeTzUfmuw
+        Cs6o1N2+vfKohomyKWJ8hquGiYkbdfKKAUJKmiJANwoF6Dl+8+kG4jhMgo6LfTEW
+        aWKnBaAmxvX4vLanu0rtxxMzlOpNHo9Qy0MwbFPbUOLBk3ohfF19MXnbISX9uNol
+        vJIpMamQCdi6k4WzWUDTK0cjq0xuCAd0u+x3YT3QVN6NyR78f5d4rzxQIwpNFqZ9
+        qpdXEHz9csiq0o0IwPnZ8Y+rdzxhF2NJ6oeWJ5yWLL1ubestrP0IxOUAuO2NE5EJ
+        54EUjxHhmimPWxI6F+HXxcnRfDu1XZ4mDb0dpvA6SbhKLZCrA3U7aCdF9tkU5s96
+        O8kQCWRyfKgvPWwgvHEcj5Gflbam2rHj0BEcjsYIrbO3jGCK9O2FxcR7n+EZWs9z
+        sj9mpawUUXiV4l2hHMryyko37R4vigNJpBvfUSenSKrfhHyA7n0TuUd0jWXiACKx
+        bXvDyZCCGBcuH/J4E9+Or8t3/Gjfpa53jPjv8HGYNvgd+zRX86FDsjtV7NECHW/l
+        mC/ePHzGSPuKAtrtuiq0nTOWQRhg8J4yO7MT1OEWKV2YoIpSRimKAaYnR9fvUisD
+        t48jdEQESNIKj36/h55Ut1sjcCOhAdnN2EJJlFBNVaOi7Y1T74FK+kC2+y5H+QnO
+        buTNPPPuWsNjp5rQu6Ub84LmHYANJKjpYjqqmUcGZZtCZqiFGaUDAM+T/ffu2IUI
+        ZbY3OQjEcemV+NJC9PM1VZey6lwKcXSaJwXrld8MurNeBIms8CUcR+vO0QfKsJMl
+        /6TUU+cm7xMBluCoVtMLFxzMYN0QZAGMqeQse31+fYqhD95JATBTcVWtVxSzgDvi
+        -----END RSA PRIVATE KEY-----
+  owner: carnd:carnd
+  path: ~/.ssh/m16r01.pem
+  permissions: '0400'
+- content: |
+    #! /bin/bash
+    exit 0
+  owner: carnd:carnd
+  path: ~/server-startup.sh
+  permissions: '0755'
+
+# final_message
+# default: cloud-init boot finished at $TIMESTAMP. Up $UPTIME seconds
+# this message is written by cloud-final when the system is finished
+# its first boot
+final_message: "The system is ready, after $UPTIME seconds"

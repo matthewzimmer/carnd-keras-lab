@@ -12,8 +12,8 @@ import csv
 
 from sklearn.preprocessing import LabelBinarizer
 
-from zimpy.maths.transformations.image_jitterer import ImageJitterer
-from zimpy.plot.image_plotter import ImagePlotter
+# from zimpy.maths.transformations.image_jitterer import ImageJitterer
+# from zimpy.plot.image_plotter import ImagePlotter
 from zimpy.serializers.trained_data_serializer import TrainedDataSerializer
 
 
@@ -256,23 +256,23 @@ class GermanTrafficSignDataset:
             del data
             self.__log('train features shape: {}'.format(self.train_orig.shape))
 
-    def plot_images(self):
-        if self.__configured:
-            ImagePlotter.plot_images(self.train_orig[:20], self.train_labels[:20])
-            ImagePlotter.plot_images(self.train_gray[:20], self.train_labels[:20], cmap='gray')
-            ImagePlotter.plot_images(ImageJitterer.jitter_images(self.train_gray[:20]), self.train_labels[:20])
-
-            ImagePlotter.plot_images(self.test_orig[:20], self.test_labels[:20])
-            ImagePlotter.plot_images(self.test_gray[:20], self.test_labels[:20], cmap='gray')
-            ImagePlotter.plot_images(ImageJitterer.jitter_images(self.test_gray[:20]), self.test_labels[:20])
-
-            ImagePlotter.plot_images(self.validate_orig[:20], self.validate_labels[:20])
-            ImagePlotter.plot_images(self.validate_gray[:20], self.validate_labels[:20], cmap='gray')
-            ImagePlotter.plot_images(ImageJitterer.jitter_images(self.validate_gray[:20]), self.validate_labels[:20])
-
-            ImagePlotter.plot_images(self.predict_orig[:5], self.predict_labels[:5])
-            ImagePlotter.plot_images(self.predict_gray[:5], self.predict_labels[:5], cmap='gray')
-            ImagePlotter.plot_images(ImageJitterer.jitter_images(self.predict_gray[:5]), self.predict_labels[:5])
+    # def plot_images(self):
+    #     if self.__configured:
+    #         ImagePlotter.plot_images(self.train_orig[:20], self.train_labels[:20])
+    #         ImagePlotter.plot_images(self.train_gray[:20], self.train_labels[:20], cmap='gray')
+    #         ImagePlotter.plot_images(ImageJitterer.jitter_images(self.train_gray[:20]), self.train_labels[:20])
+    #
+    #         ImagePlotter.plot_images(self.test_orig[:20], self.test_labels[:20])
+    #         ImagePlotter.plot_images(self.test_gray[:20], self.test_labels[:20], cmap='gray')
+    #         ImagePlotter.plot_images(ImageJitterer.jitter_images(self.test_gray[:20]), self.test_labels[:20])
+    #
+    #         ImagePlotter.plot_images(self.validate_orig[:20], self.validate_labels[:20])
+    #         ImagePlotter.plot_images(self.validate_gray[:20], self.validate_labels[:20], cmap='gray')
+    #         ImagePlotter.plot_images(ImageJitterer.jitter_images(self.validate_gray[:20]), self.validate_labels[:20])
+    #
+    #         ImagePlotter.plot_images(self.predict_orig[:5], self.predict_labels[:5])
+    #         ImagePlotter.plot_images(self.predict_gray[:5], self.predict_labels[:5], cmap='gray')
+    #         ImagePlotter.plot_images(ImageJitterer.jitter_images(self.predict_gray[:5]), self.predict_labels[:5])
 
     # private
 

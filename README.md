@@ -42,6 +42,29 @@ This is a self-assessed lab.
 Remember that you can get assistance from your mentor, the forums, or the Slack channel. You can also review the concepts from the previous lessons, or consult external documentation.
 
 
+### AWS GPU Instance Commands
+
+##### Install dependencies
+
+```$ sudo pip3 install h5py```  
+```$ sudo pip3 install scipy```  
+```$ sudo pip3 install -U scikit-learn```    
+```$ sudo pip3 install Pillow```  
+
+
+##### SSH
+
+```$ rake ssh:carnd```  
+
+##### Copy to EC2
+
+```$ rake scp:carnd:up[local_file,remote_dir]```  
+
+##### Copy from EC2
+
+```$ rake scp:carnd:down[remote_file,local_dir]```  
+
+
 **Supporting Materials**
 
 

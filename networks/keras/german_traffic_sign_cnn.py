@@ -1,8 +1,6 @@
 from keras.layers import Dense, Activation, Flatten, Convolution2D, MaxPooling2D, Dropout
 from keras.models import Sequential
-from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
-from networks.keras import backend as K
 
 from zimpy.datasets.german_traffic_signs import GermanTrafficSignDataset
 
@@ -41,12 +39,15 @@ hidden_layer_neurons = 128
 dropout_p_1, dropout_p_2 = 0.5, 0.5
 
 # If Theano backend, input_shape is different so let's take care of that first
-if K.image_dim_ordering() == 'th':
-    X_train = X_train.reshape(X_train.shape[0], nb_channels, img_rows, img_cols)
-    input_shape = (nb_channels, img_rows, img_cols)
-else:
-    X_train = X_train.reshape(X_train.shape[0], img_rows, img_cols, nb_channels)
-    input_shape = (img_rows, img_cols, nb_channels)
+# if K.image_dim_ordering() == 'th':
+#     X_train = X_train.reshape(X_train.shape[0], nb_channels, img_rows, img_cols)
+#     input_shape = (nb_channels, img_rows, img_cols)
+# else:
+#     X_train = X_train.reshape(X_train.shape[0], img_rows, img_cols, nb_channels)
+#     input_shape = (img_rows, img_cols, nb_channels)
+
+X_train = X_train.reshape(X_train.shape[0], img_rows, img_cols, nb_channels)
+input_shape = (img_rows, img_cols, nb_channels)
 
 # build the model
 model = Sequential(name='input')
@@ -99,4 +100,17 @@ loss, accuracy = model.evaluate(X_test, y_test)
 
 print('test loss: ', loss)
 print('test accuracy: ', accuracy)
+print()
+
+
+X_pred = data.predict_orig
+y_pred = data.predict_labels
+X_pred = X_pred.astype('float32')
+X_pred /= 255
+X_pred -= 0.5
+
+loss, accuracy = model.evaluate(X_pred, y_pred)
+
+print('pred loss: ', loss)
+print('pred accuracy: ', accuracy)
 print()
