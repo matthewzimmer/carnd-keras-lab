@@ -1,3 +1,8 @@
+# required in order to execute this file from project root.
+import sys
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
 from keras.layers import Dense, Activation, Flatten, Convolution2D, MaxPooling2D, Dropout
 from keras.models import Sequential
 from sklearn.model_selection import train_test_split

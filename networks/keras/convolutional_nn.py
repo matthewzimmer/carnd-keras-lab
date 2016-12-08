@@ -1,3 +1,8 @@
+# required in order to execute this file from project root.
+import sys
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
 from keras.layers import Dense, Activation, Flatten, Convolution2D
 from keras.models import Sequential
 from keras.utils import np_utils

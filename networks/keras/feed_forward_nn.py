@@ -1,3 +1,8 @@
+# required in order to execute this file from project root.
+import sys
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
 import numpy as np
 
 # TODO: Implement load the data here.

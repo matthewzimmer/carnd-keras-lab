@@ -1,3 +1,8 @@
+# required in order to execute this file from project root.
+import sys
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
 # TODO: Re-construct the network and add dropout after the pooling layer.
 # TODO: Compile and train the model.
 
